@@ -1,0 +1,20 @@
+[project]
+name = "beal-pipeline"
+version = "0.1.0"
+description = "Reprodutible Beal-style computational pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1",
+    "PyYAML>=6.0",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "sympy>=1.13",
+    "rich>=13.7"
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

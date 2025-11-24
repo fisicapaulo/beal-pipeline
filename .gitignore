@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.coverage
+.coverage
+.dist/
+build/
+dist/
+*.egg-info/
+
+# venv
+.venv/
+
+# Data outputs
+data/output/**
+
+# OS/IDE
+.DS_Store
+*.swp
+.idea/
+.vscode/

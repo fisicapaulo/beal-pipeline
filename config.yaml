@@ -1,0 +1,8 @@
+input_csv: "data/input/samples.csv"
+output_dir: "data/output"
+log_level: "INFO"
+seed: 42
+congruence_mods: [2,3,4,5,8,9,11]
+pinch:
+  max_ratio: 1e6   # exemplo de barreira (ajuste conforme seu regime)
+  enable: true
