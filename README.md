@@ -115,4 +115,8 @@ Defendendo a Ciência Aberta: código auditável e reprodutível.
 - Autor: Paulo Vieira
 - Contato: libreeducacional@gmail.com
 - Status do repositório: Pesquisa ativa, com ênfase em auditoria e reprodutibilidade
+<<<<<<< HEAD
 ````
+=======
+````
+>>>>>>> 425939e (Substitui estrutura: adiciona spectral_proof_2025, move legacy_proof e atualiza README.md)

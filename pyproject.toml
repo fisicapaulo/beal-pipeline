@@ -1,20 +1,38 @@
 [project]
 name = "beal-pipeline"
 version = "0.1.0"
-description = "Reprodutible Beal-style computational pipeline"
+description = "Pipeline computacional reprodutível para a Conjectura de Beal (Abordagem Espectral-Arakeloviana)"
+readme = "README.md"
 requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Paulo Vieira", email = "libreeducacional@gmail.com"}
+]
+keywords = ["beal conjecture", "number theory", "spectral geometry", "arakelov theory"]
+
+# Dependências atualizadas com o que usamos nos scripts (Matplotlib, Seaborn)
 dependencies = [
     "click>=8.1",
     "PyYAML>=6.0",
     "pandas>=2.2",
     "numpy>=1.26",
     "sympy>=1.13",
-    "rich>=13.7"
+    "rich>=13.7",
+    "matplotlib>=3.8",
+    "seaborn>=0.13"
 ]
+
+[project.urls]
+Repository = "https://github.com/fisicapaulo/beal-pipeline"
 
 [build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
+# CONFIGURAÇÃO CRÍTICA:
+# Como não estamos usando a pasta 'src', precisamos dizer ao setuptools
+# para procurar os pacotes na raiz ('.') e incluir as pastas específicas.
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
+include = ["spectral_proof_2025*", "legacy_proof*"]
+namespaces = false
