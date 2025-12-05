@@ -24,7 +24,6 @@
 
 </div>
 
-
 ---
 
 ## 📜 Sobre o Projeto
@@ -41,46 +40,102 @@ h(P) \le (1-\delta)\log\text{rad}(ABC) + C_{\mathrm{Global}}
 
 ## 📂 Estrutura do Repositório
 
-O projeto está organizado em duas fases distintas de desenvolvimento:
+O projeto está organizado em duas frentes:
 
-### 1. [`spectral_proof_2025/`](./spectral_proof_2025) (Abordagem Atual)
-Contém a implementação numérica da prova teórica apresentada no artigo *"Coerção Espectral e Contração Arakeloviana"*.
+### 1) `spectral_proof_2025/` (Abordagem Atual)
+Implementação numérica da prova teórica apresentada no artigo “Coerção Espectral e Contração Arakeloviana”.
 
-- `core/`: Definições formais de métricas (Altura Logarítmica, Radical Prímico, Primitividade).
-- `simulation/`: "Stress Test" que busca contraexemplos em milhões de permutações de bases e expoentes.
-- `visualization/`: Scripts para gerar evidências visuais do gap `δ > 0` e do descolamento entre altura e radical.
+- `core/` — métricas formais (Altura Logarítmica, Radical Prímico, Primitividade).
+- `simulation/` — “stress test” que busca contraexemplos em grandes amostras.
+- `visualization/` — scripts para evidenciar o gap δ > 0 e o descolamento Altura vs. Radical.
+- `pipeline_e/` — Apêndice E: módulo consolidado com checagens aritméticas clássicas (congruências, LTE, Zsigmondy, valuations, M(A,B,C)).
+- `run_pipeline_e.py` — ponto de entrada para executar o Pipeline E end-to-end.
 
-### 2. [`legacy_proof/`](./legacy_proof) (Arquivado)
-Contém experimentos, códigos e rascunhos das primeiras iterações desta pesquisa. Mantido para fins de registro histórico.
+### 2) `legacy_proof/` (Arquivado)
+Iterações anteriores (rascunhos, experimentos e testes unitários legados) preservadas para histórico e auditoria.
 
 ---
 
 ## 🚀 Como Executar (Spectral Proof)
 
-Para reproduzir os testes da abordagem espectral em sua máquina local:
+Abaixo um fluxo mínimo para reproduzir resultados localmente.
 
 ### Pré-requisitos
 
+Instale as dependências essenciais (ajuste conforme seu ambiente):
 ```bash
+python -m pip install --upgrade pip
 pip install sympy pandas seaborn matplotlib
 ```
 
-### 🔬 Rodando o Stress Test
+Se existir um arquivo `requirements.txt`, prefira:
+```bash
+pip install -r requirements.txt
+```
 
-Para verificar a robustez da desigualdade arakeloviana contra milhões de triplas quase-solução:
+---
+
+### 🔬 Stress Test (Abordagem Espectral)
+
+Executa a verificação robusta da desigualdade arakeloviana em múltiplas triplas quase-solução:
 
 ```bash
-cd spectral_proof_2025
-python -m simulation.inequality_test
+python -m spectral_proof_2025.simulation.stress_test
 ```
+
+---
 
 ### 📊 Visualização da Prova
 
-Para plotar o gráfico de dispersão (Height vs Radical) que evidencia a "Região Proibida":
+Gera gráfico de dispersão (Height vs. Radical) destacando a “Região Proibida”:
 
 ```bash
-cd spectral_proof_2025
-python -m visualization.height_vs_radical
+python -m spectral_proof_2025.visualization.plot_proof
+```
+
+---
+
+## 📎 Apêndice E — Pipeline E (Verificações Aritméticas Clássicas)
+
+O Apêndice E reúne rotinas clássicas que complementam a abordagem espectral, permitindo inspeções estruturadas em casos-modelo e validações cruzadas.
+
+- Módulos principais:
+  - `pipeline_e/congruences.py` — checagens modulares e congruências estruturais.
+  - `pipeline_e/lte.py` — Lifting The Exponent (LTE).
+  - `pipeline_e/zsigmondy.py` — existência de primos de Zsigmondy em progressões relevantes.
+  - `pipeline_e/valuations.py` — valuations p-ádicas e controle fino de expoentes.
+  - `pipeline_e/mabc.py` — funções auxiliares M(A,B,C) e primitividade.
+  - `pipeline_e/pipeline_e.py` — orquestração das rotinas acima.
+
+### ▶ Execução rápida do Pipeline E
+
+Use o entrypoint preparado:
+```bash
+python spectral_proof_2025/run_pipeline_e.py
+```
+
+Alternativa via módulo:
+```bash
+python -m spectral_proof_2025.run_pipeline_e
+```
+
+Saídas típicas:
+- Relatórios de congruências e valuations por tríplice testada.
+- Indicadores de primitividade e sinais de Zsigmondy/LTE para os casos varridos.
+- Resumo final com estatísticas da varredura.
+
+Dica: ajuste parâmetros e amostras diretamente em `pipeline_e/pipeline_e.py` e/ou `mabc.py`.
+
+---
+
+## 🧪 Reprodutibilidade e Testes
+
+- Testes legados em `legacy_proof/tests/` cobrem congruências, LTE, normalização e Zsigmondy das versões anteriores.
+- Para novas rotinas do Apêndice E, recomenda-se adicionar testes em `spectral_proof_2025/pipeline_e/` seguindo o padrão PyTest.
+
+Execução sugerida (se houver PyTest):
+```bash
+pytest -q
 ```
 
 ---
@@ -102,21 +157,18 @@ Este código serve de suporte computacional para o artigo teórico. Ao utilizar 
 
 ---
 
-<div align="center">
+## 🔑 Licença e Contato
 
-**Autor:** Paulo Vieira • **Contato:** libreeducacional@gmail.com
+- Licença: MIT (veja o arquivo `LICENSE`)
+- Autor: Paulo Vieira
+- Contato: libreeducacional@gmail.com
+- Status do repositório: Pesquisa ativa, com ênfase em auditoria e reprodutibilidade
+
+---
+
+<div align="center">
 
 Defendendo a Ciência Aberta: código auditável e reprodutível.
 
 </div>
-````
-
-- Licença: MIT (arquivo `LICENSE`)
-- Autor: Paulo Vieira
-- Contato: libreeducacional@gmail.com
-- Status do repositório: Pesquisa ativa, com ênfase em auditoria e reprodutibilidade
-<<<<<<< HEAD
-````
-=======
-````
->>>>>>> 425939e (Substitui estrutura: adiciona spectral_proof_2025, move legacy_proof e atualiza README.md)
+```
